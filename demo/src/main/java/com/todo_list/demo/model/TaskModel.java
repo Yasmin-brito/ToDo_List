@@ -17,16 +17,16 @@ public class TaskModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private UUID idTask;
     private String description;
-    private boolean status;
+    private String status;
     private Instant created_at;
 
     public UUID getId() {
-        return id;
+        return idTask;
     }
     public void setId(UUID id) {
-        this.id = id;
+        this.idTask = id;
     }
     public String getDescription() {
         return description;
@@ -34,10 +34,10 @@ public class TaskModel implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     public Instant getCreated_at() {
