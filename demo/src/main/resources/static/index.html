@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="task-body">
+        <h1>My Tasks</h1>
+        <form method="post" id="task-form">
+            <label for="description"></label>
+            <input type="text" name="description" id="description" placeholder="Escreva sua task aqui...">
+            <input type="submit" value="+ Add">
+        </form>
+    </div>
+    <div class="task-body-list">
+        <ul class="task-list">
+            <li>All |</li>
+            <li>Active |</li>
+            <li>Completed</li>
+        </ul>
+    </div>
+    <div class="task-body-result">
+        <ul id="task-body-result-list">
+
+        </ul>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
