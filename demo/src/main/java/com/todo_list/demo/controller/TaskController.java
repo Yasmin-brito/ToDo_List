@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,16 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.todo_list.demo.dtos.TaskRecordDto;
+import com.todo_list.demo.dtos.TaskStatusDto;
 import com.todo_list.demo.model.TaskModel;
 import com.todo_list.demo.service.TaskService;
 
 import jakarta.validation.Valid;
 
-
-
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
-// @RequestMapping("/tasks")
 public class TaskController {
     private final TaskService taskService;
 
@@ -63,6 +60,19 @@ public class TaskController {
         var taskModel = taskO.get();
         BeanUtils.copyProperties(taskRecordDto, taskModel);
         return ResponseEntity.status(HttpStatus.OK).body(taskService.save(taskRecordDto, taskModel));
+    }
+
+    @PatchMapping("/tasks/{id}/status")
+    public ResponseEntity<Object> updateStatus(@PathVariable(value="id") UUID id, @RequestBody @Valid TaskStatusDto taskStatusDto){
+        Optional<TaskModel> taskO = taskService.findTaskById(id);
+        if (taskO.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Task not found");
+        }
+
+        var taskModel = taskO.get();
+        BeanUtils.copyProperties(taskStatusDto, taskModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body(taskService.saveStatus(taskStatusDto, taskModel));
     }
 
     @DeleteMapping("/tasks/{id}")
