@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.todo_list.demo.dtos.TaskRecordDto;
+import com.todo_list.demo.dtos.TaskStatusDto;
 import com.todo_list.demo.model.TaskModel;
 import com.todo_list.demo.repository.TaskRepository;
 
@@ -27,9 +28,15 @@ public class TaskService {
         
         BeanUtils.copyProperties(taskRecordDto, taskModel);
         //fazer codigo para evitar duplicacao de descrição
-        taskModel.setStatus("Pendente");
+        taskModel.setStatus("PENDENTE");
         taskModel.setCreated_at(Instant.now());
         return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(taskModel));
+    }
+    public ResponseEntity<TaskModel> saveStatus(TaskStatusDto taskStatusDto, TaskModel taskModel){
+        
+        
+        taskModel.setStatus(taskStatusDto.status());
+        return ResponseEntity.status(HttpStatus.OK).body(taskRepository.save(taskModel));
     }
     public ResponseEntity<TaskModel> saveUpdate(TaskModel taskModel){
         return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(taskModel));
