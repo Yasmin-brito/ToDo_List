@@ -1,5 +1,6 @@
 * {
     font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
 }
 
 body{
@@ -8,13 +9,24 @@ body{
 }
 
 .task-body{
-    margin: 10em auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.task-input{
+    margin-top: 30px;
+    margin-bottom: 16px;
     text-align: center;
 }
 h1{
     padding-bottom: 10px;
     font-size: 45px;
     color: #191919;
+}
+#task-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .task-body input[type="text"]{
@@ -23,11 +35,11 @@ h1{
     border: none;
     border-radius: 6px;
     width: 400px;
-    height: 38px;
+    height: 45px;
     padding: 2px 10px;
     box-shadow: 0px 7px 15px rgba(240, 240, 240);
     margin-right: 18px;
-    margin-left: 40px;
+    margin-left: 0;
     font-size: 15px;
     cursor: text;
 }
@@ -41,7 +53,7 @@ h1{
     border: none;
     border-radius: 6px;
     width: 80px;
-    height: 38px;
+    height: 45px;
     padding: 5px;
     font-size: 15px;
     cursor: pointer;
@@ -49,31 +61,90 @@ h1{
 .task-body input[type="submit"]:hover{
     background-color: darkgray;
 }
-.task-body-list{
-    margin: -130px auto auto 645px;  
+.task-body-list,
+.task-body-result{
+    width: 502px; /*ajuste chat*/
 }
-.task-list{
-    padding-top: 8px;   
+.task-body-list{
+    height: 50px;
+}
+.task-list{ 
+    display: flex; /*ajuste chat*/
+    gap: 8px; /*ajuste chat*/
+    justify-content: flex-start; /*ajuste chat*/
     list-style-type: none; 
+    padding-left: 2px;
 }
 .task-list li{
     display: inline;
     color: #808080;
+    cursor: pointer;
 }
 .task-body-result{
-    margin-left: 645px;
+    height: 360px;
+    margin: auto;
 }
 #task-body-result-list{
     list-style-type: none; 
-    padding-top: 8px; 
+    padding-left: 0px;
+    padding-top: 2px;
+
 }
 #task-body-result-list li{
+    display: flex;
     background-color: #fff;
     outline: none;
-    height: 38px;
-    width: 400px;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 6px;
-    padding: 14px 0 0 16px;
+    padding-top: 6px;
+    padding-left: 16px;
+    padding-bottom: 6px;
     border-radius: 6px;
+}
+#task-body-result-list li input[type="checkbox"] {
+    display: none;
+}
+#task-body-result-list li label {
+    display: flex;
     cursor: pointer;
+    gap: 10px;
+}
+#task-body-result-list li label::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 2px solid #191919;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    background-color: #fff;
+    transition: 0.2s;
+}
+#task-body-result-list li input[type="checkbox"]:checked + label::before {
+    content: "✔";
+    background-color: #191919;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+.btn-icon-pen{
+    margin-left: auto;
+    margin-right: 4px;
+}
+.btn-icon-trash{
+    margin-right: 4px;
+}
+.btn-icon-pen,
+.btn-icon-trash{
+    background-color: transparent;
+    border: none;
+    outline: inherit;
+    cursor: pointer;
+    color: inherit;
+    font-size: 18px;
 }
